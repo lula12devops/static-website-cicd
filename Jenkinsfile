@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t static-website:latest .'
+                sh 'docker build -t static-website-cicd:latest .'
             }
         }
 
@@ -18,8 +18,8 @@ pipeline {
         stage('Deploy Website') {
             steps {
                 sh '''
-                docker rm -f static-website || true
-                docker run -d -p 80:80 --name static-website static-website:latest
+                docker rm -f static-website-cicd || true
+                docker run -d -p 80:80 --name static-website-cicd static-website-cicd:latest
                 '''
             }
         }
